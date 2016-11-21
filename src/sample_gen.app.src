@@ -1,0 +1,12 @@
+{application, sample_gen,
+ [
+  {description, ""},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { sample_gen_app, []}},
+  {env, []}
+ ]}.
