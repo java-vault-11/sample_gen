@@ -17,9 +17,8 @@ main([Verbose, CntStr]) ->
 			      Tuple
 		      end),
     lists:map(fun({EventSpecs, ProcSecs, Percentage}) ->
-		      io:fwrite("~s { \"timestamp\": ~p, \"target\": ~p, \"percentage\": ~p }~n",
-				[grg_to_seconds(ProcSecs),
-				 grg_to_seconds(EventSpecs),
+		      io:fwrite("{ \"timestamp\": ~p, \"target\": ~p, \"percentage\": ~p }~n",
+				[grg_to_seconds(EventSpecs),
 				 Target,
 				 Percentage])
 	      end, lists:sort(Tuples));
