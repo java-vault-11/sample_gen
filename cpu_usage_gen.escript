@@ -4,7 +4,6 @@
 
 main([Verbose, CntStr]) ->
     rand:seed(exs1024),
-    Target = "cpu0",
     {Count, _} = string:to_integer(CntStr),
     Tuples =
 	repeat(Count, fun() ->
@@ -16,11 +15,14 @@ main([Verbose, CntStr]) ->
 			      timer:sleep(rand:uniform(3000)),
 			      Tuple
 		      end),
-    lists:map(fun({EventSpecs, ProcSecs, Percentage}) ->
-		      io:fwrite("{ \"timestamp\": ~p, \"target\": ~p, \"percentage\": ~p }~n",
-				[grg_to_seconds(EventSpecs),
-				 Target,
-				 Percentage])
+    lists:map(fun({EventSpecs, _ProcSecs, Percentage}) ->
+		      io:fwrite("{ ~p: ~p, ~p: ~p, ~p: ~p, ~p: ~p, ~p: ~p, ~p: ~p }~n",
+				[ "time",       grg_to_seconds(EventSpecs),
+				  "issuer",     "luke.huang@linctronix.com",
+				  "source",     "local:/proc/cpuinfo",
+				  "category",   "cpu usage",
+				  "target",     "rtls",
+				  "percentage", Percentage])
 	      end, lists:sort(Tuples));
 main([CntStr]) ->
     main(["", CntStr]).
